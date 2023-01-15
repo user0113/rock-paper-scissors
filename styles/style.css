@@ -1,0 +1,47 @@
+@font-face {
+    font-family: pixel;
+    src: url(../images/slkscr.ttf);
+}
+
+body {
+    background-image: url('../images/pixelBG.jpg');
+    font-family: pixel;
+}
+
+button {
+    min-width: 36px;
+    min-height: 52px;
+    padding: 50px;
+    margin: 50px;
+}
+
+button > p{
+}
+
+.playerSelect > button {
+    transform: scaleX(-1);
+}
+
+#wol {
+    background: url('../images/Knight-Victory.gif') center no-repeat;
+}
+
+#sg {
+    background: url('../images/Sage-Victory.gif') center no-repeat;
+}
+
+#nja {
+    background: url('../images/Ninja-Victory.gif') center no-repeat;
+}
+
+#dk {
+    background: url('../images/DarkKnight-Victory.gif') center no-repeat;
+}
+
+#mgs {
+    background: url('../images/Magus-Victory.gif') center no-repeat;
+}
+
+#mnk {
+    background: url('../images/Monk-Victory.gif') center no-repeat;
+}
