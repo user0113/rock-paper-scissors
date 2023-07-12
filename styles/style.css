@@ -7,43 +7,41 @@ body {
     background-image: url('../images/pixelBG.jpg');
     font-family: pixel;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
 }
 
 div {
-    min-width: 36px;
-    min-height: 52px;
-    padding: 0px;
-    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.player, div.com{
+    flex-direction: column;
 }
 
 .playerSelect > div, .comSelect > div {
-    padding: 25px;
+    margin: 1em;
+    padding: 1em;
     flex-direction: column;
-    display: flex;
-    align-items: center;
     justify-items: flex-end;
-    border: 1px solid black;
-}
-
-p {
-    padding: 0px;
-    margin: 0px;
+    border: 3px solid gainsboro;
+    box-shadow: 1px 2px #888888;
+    border-radius: 2px;
+    background-image: linear-gradient(to bottom right, #7171be, #000074);
+    color: #FFF;
+    min-width: 100px;
+    min-height: 100px;
 }
 
 .vs {
     align-self: center;
-    margin: 0px 150px;
 }
 
 .playerSelect, .comSelect {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-.player, .com {
-    display: flex;
 }
 
 .playerSelect img {

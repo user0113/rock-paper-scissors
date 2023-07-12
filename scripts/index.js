@@ -40,3 +40,12 @@ function playRound(playerSelection, computerSelection) {
         return "You lose!";
     }
 }
+
+//divPress
+const divs = document.getElementsByClassName("pChoice");
+
+Array.from(divs).forEach(div => {
+    div.addEventListener("mousedown", function() {
+      console.log("Pressed div ID:", this.id);
+    });
+  });
