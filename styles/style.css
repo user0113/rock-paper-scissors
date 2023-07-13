@@ -5,10 +5,10 @@
 
 body {
     background-image: url('../images/pixelBG.jpg');
+    background-size: cover;
     font-family: pixel;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     height: 100vh;
 }
 
@@ -18,11 +18,29 @@ div {
     align-items: center;
 }
 
-div.player, div.com{
+.headText {
+    color: #FFF;
+    text-align: center;
+    font-size: larger;
+}
+
+div.game {
+    justify-content: space-between;
+}
+
+div.game p {
+    color: turquoise;
+}
+
+div.player, div.com {
     flex-direction: column;
 }
 
-.playerSelect > div, .comSelect > div {
+#p2counter, #p1counter {
+    color: #FFF;
+}
+
+.playerSelect > div, .comSelect > div, .playButton {
     margin: 1em;
     padding: 1em;
     flex-direction: column;
@@ -31,19 +49,54 @@ div.player, div.com{
     box-shadow: 1px 2px #888888;
     border-radius: 2px;
     background-image: linear-gradient(to bottom right, #7171be, #000074);
-    color: #FFF;
     min-width: 100px;
     min-height: 100px;
 }
 
-.pChoice {
+.playerSelect > div p, .comSelect > div p, .playButton {
+    color: #FFF;
+}
+
+.pChoice, .cChoice {
     transition: all .7s ease;
 }
 
 .playerSelect .selected {
-  transform: scale(1.1);
-  border-color: #ffc600;
-  box-shadow: 0 0 1rem #ffc600;
+    transform: scale(1.1);
+    border-color: #eee020;
+    box-shadow: 0 0 1rem #ffc800bd;
+}
+
+.comSelect .selected {
+    transform: scale(1.1);
+    border-color: #ee5020;
+    box-shadow: 0 0 1rem #c20404bd;
+}
+
+.pChoice.played {
+    translate: 15vw;
+}
+
+.cChoice.played {
+    translate: -15vw;
+}
+
+@media screen and (max-width: 1000px) {
+    .pChoice.played {
+        translate: 7vw;
+    }
+    .cChoice.played {
+        translate: -7vw;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .pChoice.played {
+        translate: 3vw;
+    }
+    .cChoice.played {
+        translate: -3vw;
+    }
 }
 
 .vs {
@@ -56,4 +109,12 @@ div.player, div.com{
 
 .playerSelect img {
     transform: scaleX(-1);
+}
+
+.play {
+    flex-direction: column;
+}
+
+.play p {
+    text-align: center;
 }
