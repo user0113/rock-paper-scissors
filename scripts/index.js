@@ -46,6 +46,14 @@ const divs = document.getElementsByClassName("pChoice");
 
 Array.from(divs).forEach(div => {
     div.addEventListener("mousedown", function() {
-      console.log("Pressed div ID:", this.id);
+        const pressedDivID = this.id;
+        console.log("Pressed div ID:", pressedDivID);
+        this.classList.add("selected");
+
+        Array.from(divs).forEach(otherDiv => {
+            if (otherDiv.id !== pressedDivID) {
+              otherDiv.classList.remove("selected");
+            }
+          });
     });
   });

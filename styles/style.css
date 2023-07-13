@@ -36,6 +36,16 @@ div.player, div.com{
     min-height: 100px;
 }
 
+.pChoice {
+    transition: all .7s ease;
+}
+
+.playerSelect .selected {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  box-shadow: 0 0 1rem #ffc600;
+}
+
 .vs {
     align-self: center;
 }
