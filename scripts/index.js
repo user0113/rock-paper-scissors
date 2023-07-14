@@ -25,6 +25,46 @@ function getRandom(min, max) {
 }
  Old logic for RPS */
 
+//functions to play or change BGM
+const battleBGM = document.getElementById("battleMusic");
+const victoryBGM = document.getElementById("victoryMusic");
+const lossBGM = document.getElementById("lossMusic");
+
+function playBattleMusic() {
+    pauseBackgroundMusic();
+    battleBGM.volume = 0.2;
+    battleBGM.play();
+}
+
+function playVictoryMusic() {
+    pauseBackgroundMusic();
+    victoryBGM.volume = 0.2;
+    victoryBGM.play();
+}
+
+function playLossMusic() {
+    pauseBackgroundMusic();
+    lossBGM.volume = 0.2;
+    lossBGM.play();
+}
+  
+function pauseBackgroundMusic() {
+    battleBGM.pause();
+    battleBGM.currentTime = 0;
+    victoryBGM.pause();
+    victoryBGM.currentTime = 0;
+    lossBGM.pause();
+    lossBGM.currentTime = 0;
+}
+
+//used to determine first time to play BGM once user interacts with page
+let hasUserInteracted = false;
+
+//stores victory/loss result to display as a message for the palyer
+let result = "";
+//stores whether a full match has just been palyed
+let state = 0;
+
 //functions to increase player and computer scores
 const p1counter = document.getElementById("p1counter");
 const p2counter = document.getElementById("p2counter");
@@ -39,26 +79,54 @@ function incrementp1Counter() {
 function incrementp2Counter() {
     p2value++;
     p2counter.textContent = p2value;
-  }
+}
+
+function resetCounters () {
+    p1value = 0;
+    p2value = 0;
+    p1counter.textContent = p1value;
+    p2counter.textContent = p2value;
+}
 
 //function to compare player and com selection to determine winner of RPS round
 function playRound(playerSelection, computerSelection) {
+    const div = document.querySelector("#msg");
+    div.classList.remove("change");
     /*if (playerSelection == undefined) {
         return "INVALID!";
     }
     else */
     if (playerSelection == computerSelection) {
         console.log(playerSelection + " and " + computerSelection + ".")
+        div.classList.add("change");
+        div.textContent = "It's a tie!";
         return "It's a tie!";
     } else if (playerSelection == "ROCK" && computerSelection == "SCISSORS"
             || playerSelection == "PAPER" && computerSelection == "ROCK"
             || playerSelection == "SCISSORS" && computerSelection == "PAPER") {
                 console.log(playerSelection + " beats " + computerSelection + ".")
+                div.classList.add("change");
                 incrementp1Counter();
-                return "You win!";
+                console.log(p1value)
+                if (p1value === 5) {
+                    div.textContent = "Match won!";
+                    state = 1;
+                    playVictoryMusic();
+                    return "You won the match!"
+                }
+                div.textContent = "You win!";
+                return "You win!"
     } else {
         console.log(computerSelection + " beats " + playerSelection + ".")
+        div.classList.add("change");
         incrementp2Counter();
+        if (p2value === 5) {
+            div.textContent = "Match lost!";
+            state = 1;
+            playLossMusic();
+            return "You lost the match!";
+        }
+        div.textContent = "You lose!";
         return "You lose!";
     }
 }
@@ -67,8 +135,11 @@ function playRound(playerSelection, computerSelection) {
 const divs = document.getElementsByClassName("pChoice");
 Array.from(divs).forEach(div => {
     div.addEventListener("mousedown", function() {
+        if (!hasUserInteracted) {
+            playBattleMusic();
+            hasUserInteracted = true;
+        }
         const pressedDivID = this.id;
-        console.log("Pressed div ID:", pressedDivID);
         this.classList.add("selected");
 
         Array.from(divs).forEach(otherDiv => {
@@ -94,6 +165,17 @@ function enableMousePresses() {
 //plays a round of RPS if player has selected champion
 const playDiv = document.querySelector(".playButton");
 playDiv.addEventListener("mousedown", function handleMouse() {
+    if (!hasUserInteracted) {
+        playBattleMusic();
+        hasUserInteracted = true;
+    }
+    if (state == 1) {
+        playBattleMusic();
+        resetCounters();
+        const div = document.querySelector("#msg");
+        div.textContent = "";
+        state = 0;
+    }
     const className = "selected";
     const elements = document.querySelectorAll("." + className);
     if (elements.length > 0) {
@@ -108,7 +190,7 @@ playDiv.addEventListener("mousedown", function handleMouse() {
         let timerId;
         clearTimeout(timerId);
         timerId = setTimeout(function() {
-            //randomly selects a choice, un-highlights all others
+            //generates random number from 1-3, selects div from index of all divs CPU can choose,only leaves choosen div in "selected" class
             const divs = document.querySelectorAll(".cChoice.selected");
             const randomIndex = Math.floor(Math.random() * divs.length);
             const randomDiv = divs[randomIndex];
@@ -123,11 +205,6 @@ playDiv.addEventListener("mousedown", function handleMouse() {
             Array.from(divs2).forEach(div => {
                   div.classList.add("played");
               });
-            console.log("Function executed after " + (delay / 1000) + " seconds");
-            //gets RPS value of choices, plays a round using those choices
-            const playC = document.querySelector(".pChoice.played").getAttribute("value");
-            const comC = document.querySelector(".cChoice.played").getAttribute("value");
-            console.log(playRound(playC,comC));
           }, delay);
           //re-enables mouse presses after round is played
           setTimeout(enableMousePresses, 3750);
@@ -136,6 +213,13 @@ playDiv.addEventListener("mousedown", function handleMouse() {
           let timerId2;
           clearTimeout(timerId2);
           timerId = setTimeout(function() {
+            //gets RPS value of choices, plays a round using those choices
+            const playC = document.querySelector(".pChoice.played").getAttribute("value");
+            const comC = document.querySelector(".cChoice.played").getAttribute("value");
+            const delay3 = 700;
+            let timerId3;
+            clearTimeout(timerId3);
+            timerId3 = setTimeout(console.log(playRound(playC,comC)), delay3);
             const divs = document.querySelectorAll(".played");
             divs.forEach((div) => {
                 div.classList.remove("selected");

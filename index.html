@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="./styles/style.css">
   </head>
   <body>
-    <div class="head">
+    <audio id="battleMusic" src="./audio/battle.mp3" loop></audio>
+    <audio id="victoryMusic" src="./audio/victory.mp3" loop></audio>
+    <audio id="lossMusic" src="./audio/loss.mp3" loop></audio>
+    <div class="header">
       <p class="headText">
         <span style="color:rgb(226, 59, 92); text-shadow: 1px 1px black;">Might</span>, 
         <span style="color:rgb(104, 138, 238); text-shadow: 1px 1px black;">Magic</span> and 
@@ -44,7 +47,7 @@
         </div>
       </div>
       <div class="mid">
-        <div><p id="msg">You win!</p></div>
+        <div><p id="msg">Placeholder</p></div>
         <div class="vs"><p> VS </p></div>
       </div>
       <div class="com">
@@ -70,7 +73,7 @@
       <div class="space"></div>
     </div>
     <div class="play">
-      <p>Select a champion, then click the "Play!" button and the CPu will select theirs!</p>
+      <p>Select a champion, then click the "Play!" button and the CPu will select theirs! First to 5 wins the match!</p>
       <div id="playID" class="playButton">
         <p>Play!</p>
       </div>

@@ -108,6 +108,16 @@ div.mid {
 
 div p#msg {
     color: #FFF;
+    opacity: 0;
+    transition: all .7s ease;
+    min-width: 113px;
+    min-height: 16px;
+}
+
+div p#msg.change{
+    color: #FFF;
+    display: inline;
+    opacity: 100;
 }
 
 div.mid > div.vs {
