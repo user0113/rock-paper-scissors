@@ -99,8 +99,19 @@ div.player, div.com {
     }
 }
 
-.vs {
-    align-self: center;
+div.mid {
+    height: 91%;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+div p#msg {
+    color: #FFF;
+}
+
+div.mid > div.vs {
+    flex: 2;
 }
 
 .playerSelect, .comSelect {
